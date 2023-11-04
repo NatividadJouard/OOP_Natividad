@@ -39,6 +39,9 @@ import java.util.Scanner;
                     scan.nextLine(); 
                     break;
             }
+                    if (i == students.length - 1) {
+                    System.out.println("Student record limit reached.");
+        }
         }
         }
 
