@@ -77,26 +77,30 @@ class Student {
             switch (choice) {
                 case 1:
                     System.out.println("You have Selected Add Student.");
-                    StudentMethods.addStudent(scan, students);
+                    System.out.println("");
+                    StudentMethods.AddSRecord(scan, students);
                     student.displayLine();
                     break;
                 case 2:
                     System.out.println("You have Selected Edit Student Record.");
-                    StudentMethods.editStudent(scan, students);
+                    System.out.println("");
+                    StudentMethods.EditSRecord(scan, students);
                     student.displayLine();
                     break;
                 case 3:
                     System.out.println("You have Selected View All Records.");
-                    StudentMethods.viewStudent(students);
+                    StudentMethods.ViewSRecords(students);
                     break;
                 case 4:
                     System.out.println("You have Selected Search Student.");
-                    StudentMethods.searchStudent(scan, students);
+                    System.out.println("");
+                    StudentMethods.SearchSRecord(scan, students);
                     student.displayLine();
                     break;
                 case 5:
                     System.out.println("You have Selected Delete Student.");
-                    StudentMethods.deleteStudent(scan, students);
+                    System.out.println("");
+                    StudentMethods.DeleteSRecord(scan, students);
                     student.displayLine();
                     break;
                 case 6:
