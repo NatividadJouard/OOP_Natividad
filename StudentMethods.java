@@ -47,56 +47,67 @@ import java.util.Scanner;
 
         public static void EditSRecord(Scanner scan, Student[] students) {
             boolean viewStudents = false;
+
             for (int i = 0; i < students.length; i++) {
                 if (students[i] != null) {
-                viewStudents = true;
-                ViewSRecords(students);
-                System.out.println("Student " + (i + 1) + ":");
-                System.out.println("Name: " + students[i].getName() + "\nCourse: " + students[i].getCourse() + "\nGWA: " + students[i].getGwa());
+                    viewStudents = true;
+                    System.out.println("Student " + (i + 1) + ":");
+                    System.out.println("Name: " + students[i].getName() + "\nCourse: " + students[i].getCourse() + "\nGWA: " + students[i].getGwa());
+                    System.out.println("");
                 }
             }
+
             if (!viewStudents) {
                 System.out.println("No Student Found.");
                 return;
             }
+
+            while (true) {
                 System.out.println("Enter the number of the student you want to edit from (1 to " + students.length + "):");
-                while (!scan.hasNextInt()) {
+                if (!scan.hasNextInt()) {
                     System.out.println("Invalid Key. Please enter a valid number.");
                     scan.next();
+                    continue;
                 }
-            int SI = scan.nextInt() - 1;
-            scan.nextLine();
 
-            if (SI >= 0 && SI < students.length && students[SI] != null) {
-                System.out.println("Enter new name:");
-                String newName = scan.nextLine();
-                System.out.println("Enter new course:");
-                String newCourse = scan.nextLine();
-                double newGwa = 0;
-                boolean numGwa = false;
+                int SI = scan.nextInt() - 1;
+                scan.nextLine();
 
-                while (!numGwa) {
-                System.out.println("Enter new GWA:");
+                if (SI >= 0 && SI < students.length && students[SI] != null) {
+                    System.out.println("Enter new name:");
+                    String newName = scan.nextLine();
+                    System.out.println("Enter new course:");
+                    String newCourse = scan.nextLine();
+                    double newGwa = 0;
+                    boolean numGwa = false;
 
-                    if (scan.hasNextDouble()) {
-                        newGwa = scan.nextDouble();
-                        numGwa = true;
-                    } 
-                    else {
-                    System.out.println("Only numbers are allowed for GWA. Please try again.");
-                    scan.next();
+                    while (!numGwa) {
+                        System.out.println("Enter new GWA:");
+
+                        if (scan.hasNextDouble()) {
+                            newGwa = scan.nextDouble();
+                            numGwa = true;
+                        } 
+                        else {
+                            System.out.println("Only numbers are allowed for GWA. Please try again.");
+                            scan.next();
+                        }
                     }
-            }
-            students[SI].setName(newName);
-            students[SI].setCourse(newCourse);
-            students[SI].setGwa(newGwa);
-            System.out.println("Student information updated.");
-            scan.nextLine();
-            } 
-            else {
-            System.out.println("No Student Found.");
+
+                    students[SI].setName(newName);
+                    students[SI].setCourse(newCourse);
+                    students[SI].setGwa(newGwa);
+                    System.out.println("Student information updated.");
+                    scan.nextLine();
+                    break; // Exit the loop after successful edit
+                } 
+                else {
+                    System.out.println("Invalid choice. Please enter a valid number within the choices.");
+                }
             }
 }
+
+
 
 
         public static void ViewSRecords(Student[] students) {
@@ -115,34 +126,40 @@ import java.util.Scanner;
                 }
         }
 
-        public static void DeleteSRecord(Scanner scan, Student[] students) {
-            
-            boolean ViewStudents = false;
+       public static void DeleteSRecord(Scanner scan, Student[] students) {
+            boolean viewStudents = false;
+
             for (int i = 0; i < students.length; i++) {
                 if (students[i] != null) {
-                ViewStudents = true;
-                ViewSRecords(students);
-                System.out.println("Enter the number of the student you want to delete from (1 to " + students.length + "):");
-                    while (!scan.hasNextInt()) {
-                    System.out.println("Invalid Key. Please enter a valid number.");
-                    scan.next();
-                    }
-                    int SI = scan.nextInt() - 1;
-                    scan.nextLine(); 
+                    viewStudents = true;
+                    ViewSRecords(students);
+                    System.out.println("Enter the number of the student you want to delete from (1 to " + students.length + "), or enter 0 to go back to the main menu:");
 
-                    if (SI >= 0 && SI < students.length && students[SI] != null) {
-                        students[SI] = null;
-                        System.out.println("Selected Student is deleted.");
-                    } 
-                    else {
-                        System.out.println("No Student Found.");
+                    while (true) {
+                        if (!scan.hasNextInt()) {
+                            System.out.println("Invalid Key. Please enter a valid number or 0 to go back to the main menu.");
+                            scan.next();
+                        } else {
+                            int SI = scan.nextInt();
+                            if (SI == 0) {
+                                // Exit the delete process and return to the main menu
+                                return;
+                            } else if (SI > 0 && SI <= students.length && students[SI - 1] != null) {
+                                students[SI - 1] = null;
+                                System.out.println("Selected Student is deleted.");
+                                break; // Break the loop when a valid choice is made
+                            } else {
+                                System.out.println("Invalid Key. Please enter a valid number or 0 to go back to the main menu.");
+                            }
+                        }
                     }
-                
                 }
             }
-                if (!ViewStudents) {
-                    System.out.println("No Student Found.");
-                }
-                
+
+            if (!viewStudents) {
+                System.out.println("No Student Found.");
+            }
         }
+
+
     }
