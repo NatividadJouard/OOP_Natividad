@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package information;
 import java.util.Scanner;
 //Natividad TP
@@ -42,9 +38,8 @@ class Student {
         System.out.println("1. Add Student");
         System.out.println("2. Edit Student Record");
         System.out.println("3. View All Records");
-        System.out.println("4. Search Student");
-        System.out.println("5. Delete Student");
-        System.out.println("6. Exit");
+        System.out.println("4. Delete Student");
+        System.out.println("5. Exit");
         System.out.println("________________________");
     }
      public void displayLine(){
@@ -62,7 +57,7 @@ class Student {
         Student[] students = new Student[10];
         
         int choice = 0;
-        while (choice != 6) {
+        while (choice != 5) {
         Student student = new Student("", "", 0);
         student.displaychoices();
         
@@ -77,33 +72,25 @@ class Student {
             switch (choice) {
                 case 1:
                     System.out.println("You have Selected Add Student.");
-                    System.out.println("");
                     StudentMethods.AddSRecord(scan, students);
                     student.displayLine();
                     break;
                 case 2:
                     System.out.println("You have Selected Edit Student Record.");
-                    System.out.println("");
                     StudentMethods.EditSRecord(scan, students);
                     student.displayLine();
                     break;
                 case 3:
                     System.out.println("You have Selected View All Records.");
                     StudentMethods.ViewSRecords(students);
-                    break;
-                case 4:
-                    System.out.println("You have Selected Search Student.");
-                    System.out.println("");
-                    StudentMethods.SearchSRecord(scan, students);
                     student.displayLine();
                     break;
-                case 5:
+                case 4:
                     System.out.println("You have Selected Delete Student.");
-                    System.out.println("");
                     StudentMethods.DeleteSRecord(scan, students);
                     student.displayLine();
                     break;
-                case 6:
+                case 5:
                     System.out.println("Exited Student Records");
                     break;
                 default:
