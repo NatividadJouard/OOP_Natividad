@@ -1,0 +1,106 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package runanimal;
+
+import java.util.Scanner;
+
+abstract class Animal {
+
+    abstract void eat();
+
+    abstract void sleep();
+
+    abstract void makesound();
+}
+
+class Bird extends Animal {
+
+    void eat() {
+        System.out.println("Birds eat any kind of seeds");
+    }
+
+    void sleep() {
+        System.out.println("Birds sleelp for 10-12 hours per day");
+    }
+
+    void makesound() {
+        System.out.println("chirp chirp");
+    }
+}
+
+class Cat extends Animal {
+
+    void eat() {
+        System.out.println("Cat eat sardines");
+    }
+
+    void sleep() {
+        System.out.println("Birds sleelp for 10-12 hours per day");
+    }
+
+    void makesound() {
+        System.out.println("meow meow");
+    }
+}
+
+class Dog extends Animal {
+
+    void eat() {
+        System.out.println("Dog eats bone");
+    }
+
+    void sleep() {
+        System.out.println("Dog sleelp for 8-12 hours per day");
+    }
+
+    void makesound() {
+        System.out.println("aw aw");
+    }
+}
+
+public class RunAnimal {
+
+    public void Display() {
+        System.out.print("_________________________________");
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Pick an animal: \nPress Key \nB for Bird\nC for Cat\nD for Dog\nE for Exit\n_________________________________");
+            String choice = scan.nextLine();
+
+            if (choice.equalsIgnoreCase("E")) {
+                System.out.println("Program Exited. Goodbye!");
+                break;
+            }
+            Animal selectedAnimal;
+
+            switch (choice.toUpperCase()) {
+                case "B":
+                    selectedAnimal = new Bird();
+                    System.out.println("_________________________________");
+                    break;
+                case "C":
+                    selectedAnimal = new Cat();
+                    System.out.println("_________________________________");
+                    break;
+                case "D":
+                    selectedAnimal = new Dog();
+                    System.out.println("_________________________________");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose B, C, D, or E.");
+                    System.out.println("_________________________________");
+                    continue;
+            }
+            selectedAnimal.eat();
+            selectedAnimal.sleep();
+            selectedAnimal.makesound();
+        }
+    }
+
+}
