@@ -6,7 +6,7 @@ package runquad;
 
 /**
  *
- * @author eduna
+ * @author 
  */
 public class Quadrilateral {
     public void showDescription() {
