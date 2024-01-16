@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author eduna
+ * @author 
  */
 public class RunQuad {
 
