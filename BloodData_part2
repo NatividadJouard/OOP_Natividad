@@ -1,0 +1,41 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package runblooddata;
+
+/**
+ *
+ * @author 
+ */
+class BloodData {
+    private String bloodType;
+    private String rhFactor;
+
+    public BloodData() {
+        this.bloodType = "O";
+        this.rhFactor = "+";
+    }
+
+    public void display() {
+        System.out.println("Blood Type: " + getBloodType()+ getRhFactor()+" is added to the blood bank.");
+    }
+
+    // Getter methods
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public String getRhFactor() {
+        return rhFactor;
+    }
+
+    // Setter methods
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public void setRhFactor(String rhFactor) {
+        this.rhFactor = rhFactor;
+    }
+}
