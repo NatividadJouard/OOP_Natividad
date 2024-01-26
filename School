@@ -1,0 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package school;
+
+/**
+ *
+ * @author eduna
+ */
+
+public class School {
+    public static void main(String[] args) {
+        Essay essay = new Essay();
+        System.out.println(essay.message); // Output Good luck
+        System.out.println(essay.getPrice()); // Output 0.0
+        System.out.println(essay.isFinished()); // Output false
+        
+    }
+}
