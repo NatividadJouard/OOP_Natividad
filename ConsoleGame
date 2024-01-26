@@ -1,0 +1,160 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package consolegame;
+
+import java.util.Scanner;
+import consolegame.Game;
+import consolegame.GameMode;
+import consolegame.Player;
+import java.util.Random;
+/**
+ *
+ * @author eduna
+ */
+
+public class ConsoleGame implements Player, GameMode, Game {
+
+    private String playerName;
+    private int selectedMode;
+
+    public static void main(String[] args) {
+        ConsoleGame game = new ConsoleGame();
+        game.play();
+    }
+
+    public void play() {
+        enterName();
+        selectMode();
+        start();
+    }
+
+    private void enterName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        playerName = scanner.nextLine();
+    }
+
+    @Override
+    public String getName() {
+        return playerName;
+    }
+
+    @Override
+    public void selectMode() {
+        System.out.println("Press key to select your game mode:");
+        System.out.println("1 - Endless");
+        System.out.println("2 - Campaign");
+
+        Scanner scanner = new Scanner(System.in);
+        char modeKey = scanner.next().charAt(0);
+
+        switch (modeKey) {
+            case '1':
+                selectedMode = 1;
+                break;
+            case '2':
+                selectedMode = 2;
+                break;
+            default:
+                System.out.println("Invalid choice. Defaulting to Endless mode.");
+                selectedMode = 1;
+                break;
+        }
+    }
+
+    @Override
+    public void start() {
+        System.out.println("Press 'P' to start playing, " + getName());
+        Scanner scanner = new Scanner(System.in);
+        char startKey = scanner.next().charAt(0);
+
+        if (startKey == 'P' || startKey == 'p') {
+            System.out.println("Game started! Player: " + getName() + ", Mode: " + selectedMode);
+
+            if (selectedMode == 1) {
+                playEndlessMathGame();
+            } else {
+                playCampaignMathGame();
+            }
+        } else {
+            System.out.println("Invalid choice. Exiting the game.");
+        }
+    }
+
+    private void playEndlessMathGame() {
+        System.out.println("Endless mode - Keep solving math problems. Type 'exit' to end the game.");
+
+        while (true) {
+            playMathGame();
+
+            System.out.println("Do you want to continue? (Type 'exit' to end)");
+            Scanner scanner = new Scanner(System.in);
+            String continueChoice = scanner.nextLine();
+
+            if ("exit".equalsIgnoreCase(continueChoice)) {
+                System.out.println("Endless mode ended. Goodbye, " + getName() + "!");
+                break;
+            }
+        }
+    }
+
+    private void playCampaignMathGame() {
+        System.out.println("Campaign mode - Solve a series of math problems with increasing difficulty.");
+
+        for (int i = 1; i <= 5; i++) { // Let's have 5 problems in the campaign
+            System.out.println("Level " + i);
+            playMathGame();
+        }
+
+        System.out.println("Campaign mode completed. Congratulations, " + getName() + "!");
+    }
+
+    private void playMathGame() {
+        Random random = new Random();
+        int num1 = random.nextInt(10) + 1; // Random number between 1 and 10
+        int num2 = random.nextInt(10) + 1; // Random number between 1 and 10
+
+        // Randomly choose an arithmetic operation
+        int operation = random.nextInt(4); // 0: add, 1: subtract, 2: multiply, 3: divide
+
+        int result;
+        char operator;
+
+        switch (operation) {
+            case 0:
+                result = num1 + num2;
+                operator = '+';
+                break;
+            case 1:
+                result = num1 - num2;
+                operator = '-';
+                break;
+            case 2:
+                result = num1 * num2;
+                operator = '*';
+                break;
+            case 3:
+                result = num1 / num2;
+                operator = '/';
+                break;
+            default:
+                result = 0;
+                operator = '+';
+        }
+
+        System.out.println("Solve the following math problem:");
+        System.out.println(num1 + " " + operator + " " + num2 + " = ?");
+
+        Scanner scanner = new Scanner(System.in);
+        int userAnswer = scanner.nextInt();
+
+        if (userAnswer == result) {
+            System.out.println("Correct! Well done, " + getName() + "!");
+        } else {
+            System.out.println("Incorrect. The correct answer is: " + result);
+        }
+        
+    }
+}
