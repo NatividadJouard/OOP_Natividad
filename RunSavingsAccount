@@ -1,0 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package runsavingsaccount;
+
+/**
+ *
+ * @author Lab2-PC21
+ */
+import java.util.Scanner;
+
+public class RunSavingsAccount {
+
+    public static void main(String[] args) {
+
+        SavingsAccount savings = new SavingsAccount();
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter the interest rate: ");
+        double interestRate = input.nextDouble();
+        SavingsAccount.setInterestRate(interestRate);
+
+        System.out.print("Enter the amount to be deposited: ");
+        double amount = input.nextDouble();
+        savings.deposit(amount);
+
+        char choice;
+        do {
+            System.out.print("Press D for deposit, W for withdraw, E for Exit: ");
+            choice = input.next().charAt(0);
+            switch (choice) {
+                case 'D':
+                case 'd':
+                    System.out.print("Enter the amount to be deposited: ");
+                    amount = input.nextDouble();
+                    savings.deposit(amount);
+                    break;
+                case 'W':
+                case 'w':
+                    System.out.print("Enter the amount to be withdrawn: ");
+                    amount = input.nextDouble();
+                    amount = savings.withdraw(amount);
+                    break;
+                case 'E':
+                case 'e':
+                    System.out.println("Thank You for Banking with us.");
+                    break;
+                default:
+                    System.out.println("Invalid input. Please enter D, W, or E.");
+            }
+            SavingsAccount.showBalance(savings);
+            if (savings.getBalance() > 1000) {
+                savings.addInterest();
+                SavingsAccount.showBalance(savings);
+            }
+        } while (choice != 'E' && choice != 'e');
+    }
+}
