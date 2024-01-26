@@ -1,0 +1,208 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package collegelist;
+
+/**
+ *
+ * @author eduna
+ */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Person {
+    private String name;
+    private String contactNum;
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setContactNum(String c) {
+        contactNum = c;
+    }
+
+    public String getContactNum() {
+        return contactNum;
+    }
+}
+
+class Employee extends Person {
+    private double salary;
+    private String department;
+
+    public void setSalary(double s) {
+        salary = s;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setDepartment(String d) {
+        department = d;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+}
+
+class Student extends Person {
+    private String program;
+    private int yearLevel;
+
+    public void setProgram(String p) {
+        program = p;
+    }
+
+    public String getProgram() {
+        return program;
+    }
+
+    public void setYearLevel(int y) {
+        yearLevel = y;
+    }
+
+    public int getYearLevel() {
+        return yearLevel;
+    }
+}
+
+class Faculty extends Person {
+    private boolean status;
+
+    public boolean isRegular() {
+        return status;
+    }
+
+    public void setStatus(boolean s) {
+        status = s;
+    }
+}
+
+public class CollegeList {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        char choice;
+        List<Person> personList = new ArrayList<>();
+
+        do {
+            System.out.println("Select a category: (E)mployee, (F)aculty, (S)tudent, (X)Exit");
+            char category = scanner.next().charAt(0);
+
+            if (category == 'X' || category == 'x') {
+                break;
+            }
+
+            Person person = null;
+
+            switch (category) {
+                case 'E':
+                case 'e':
+                    person = new Employee();
+                    System.out.println("Enter name:");
+                    person.setName(scanner.next());
+
+                    System.out.println("Enter contact number:");
+                    person.setContactNum(scanner.next());
+
+                    Employee employee = (Employee) person;
+
+                    System.out.println("Enter salary:");
+                    employee.setSalary(scanner.nextDouble());
+
+                    System.out.println("Enter department:");
+                    employee.setDepartment(scanner.next());
+
+                    System.out.println("Details: " + person.getName() + "\nContact Number: " + person.getContactNum() +
+                            "\nSalary: " + employee.getSalary() + "\nDepartment:  " + employee.getDepartment());
+                    break;
+
+                case 'F':
+                case 'f':
+                    person = new Faculty();
+                    System.out.println("Enter name:");
+                    person.setName(scanner.next());
+
+                    System.out.println("Enter contact number:");
+                    person.setContactNum(scanner.next());
+
+                    Faculty faculty = (Faculty) person;
+
+                    System.out.println("Is the faculty regular? (Y/N):");
+                    faculty.setStatus(scanner.next().equalsIgnoreCase("Y"));
+
+                    System.out.println("Details: " + person.getName() + "\nContact Number: " + person.getContactNum() +
+                            "\nRegular: " + faculty.isRegular());
+                    break;
+
+                case 'S':
+                case 's':
+                    person = new Student();
+                    System.out.println("Enter name:");
+                    person.setName(scanner.next());
+
+                    System.out.println("Enter contact number:");
+                    person.setContactNum(scanner.next());
+
+                    Student student = (Student) person;
+
+                    System.out.println("Enter program:");
+                    student.setProgram(scanner.next());
+
+                    // Validate year level input
+                    int yearLevel;
+                        do {
+                        System.out.println("Enter year level (1-4):");
+                        while (!scanner.hasNextInt()) {
+                            System.out.println("Invalid input. Please enter a valid year level (1-4):");
+                            scanner.next(); // consume the invalid input
+                        }
+                        yearLevel = scanner.nextInt();
+                    } while (yearLevel < 1 || yearLevel > 4);
+
+                    student.setYearLevel(yearLevel);
+
+                    System.out.println("Details: " + person.getName() + "\nContact Number: " + person.getContactNum() +
+                            "\nProgram: " + student.getProgram() + "\nYear Level: " + student.getYearLevel());
+                    break;
+
+                default:
+                    System.out.println("Invalid category selection.");
+            }
+
+            personList.add(person);
+
+            System.out.println("Do you want to continue? (Y/N)");
+            choice = scanner.next().charAt(0);
+        } while (choice == 'Y' || choice == 'y');
+
+        System.out.println("Exiting the program.");
+
+        System.out.println("\nSummary of Entered Details:");
+            for (Person p : personList) {
+            System.out.println("Name: " + p.getName() + ", Contact Number: " + p.getContactNum());
+            if (p instanceof Employee) {
+                Employee e = (Employee) p;
+                System.out.println("Salary: " + e.getSalary() + ", Department: " + e.getDepartment());
+            } else if (p instanceof Faculty) {
+                Faculty f = (Faculty) p;
+                System.out.println("Faculty Regular Status: " + f.isRegular());
+            } else if (p instanceof Student) {
+                Student s = (Student) p;
+                System.out.println("Program: " + s.getProgram() + ", Year Level: " + s.getYearLevel());
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
