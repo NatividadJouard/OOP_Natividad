@@ -1,0 +1,51 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package runblooddata;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author 
+ */
+public class RunBloodData {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        BloodData bd = new BloodData();
+
+        while (true) {
+            System.out.println("\n1. Add blood details");
+            System.out.println("2. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scan.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the blood type of patient:\n(O, A, B, AB): ");
+                    String input1 = scan.next();
+                    System.out.println("Enter the Rhesus factor (+ or -): \n");
+                    String input2 = scan.next();
+                    
+                    bd.setBloodType(input1);
+                    bd.setRhFactor(input2);
+
+                    bd.display();
+                    break;
+
+                case 2:
+                    System.out.println("Thank you for the blood");
+                    System.exit(0);
+                    break;
+                    
+                default:
+                    System.out.println("Invalid choice. Please enter again.");
+            }
+        }
+    }
+}
